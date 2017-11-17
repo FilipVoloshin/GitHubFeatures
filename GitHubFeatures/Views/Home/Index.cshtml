@@ -1,3 +1,39 @@
-﻿@{
+﻿@model GitHubFeatures.Models.Forms.GitHubInformationForm
+@{
     ViewData["Title"] = "Home Page";
 }
+
+<div class="container">
+    <div class="row">
+        <div class="col-sm-6">
+            <h2>GitHub features</h2>
+            <form asp-controller="Home" asp-action="Check" data-ajax="true" data-ajax-method="POST" id="case1_f">
+                <div class="form-group">
+                    <label for="usersName">User's name:</label>
+                    <input asp-for="UserName" type="text" class="form-control" id="usersName"
+                           data-val="true"
+                           data-val-required="GitHub's user name field is required."
+                           form="case1_form"
+                           required />
+                </div>
+                <div class="form-group">
+                    <label for="usersName">GitHub repository name:</label>
+                    <input asp-for="RepositoryName" type="text" class="form-control" id="git_repo"
+                           data-val="true"
+                           data-val-required="GitHub's user name field is required."
+                           form="case1_form"
+                           required />
+                </div>
+                <div class="form-group">
+                    <label for="options">Choose option:</label>
+                    <select class="form-control" id="options">
+                        <option value="0">Check if repository exist</option>
+                    </select>
+                </div>
+                <input class="btn btn-default" form="case1_form" type="submit" value="Go" />
+            </form>
+        </div>
+        <div class="col-sm-6 text-center" id="update_information">
+        </div>
+    </div>
+</div>
