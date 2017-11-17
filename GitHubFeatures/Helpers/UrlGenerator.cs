@@ -7,7 +7,7 @@ namespace GitHubFeatures.Helpers
     public class UrlGenerator : IUrlGenerator
     {
         public const string GITHUB_API_URL = @"https://api.github.com/";
-        public const string GITHUB_REPO_URL = @"repos/{:owner}{:repo}";
+        public const string GITHUB_REPO_URL = @"repos/{:owner}/{:repo}";
         public string GenerateUrlForGitHubApi(GitHubSettings settings)
         {
             var urlString = string.Empty;
