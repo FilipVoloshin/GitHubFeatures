@@ -7,11 +7,11 @@
     <div class="row">
         <div class="col-sm-6">
             <h2>GitHub features</h2>
-            <form asp-antiforgery="true" asp-action="Check" asp-controller="Home" method="post" id="case1_f">
+            <form asp-antiforgery="true" asp-action="Check" asp-controller="Home" method="post" id="githubinfo_form">
                 @Html.AntiForgeryToken()
                 <div class="form-group">
                     <label asp-for="UserName">User's name:</label>
-                    <input asp-for="UserName" type="text" class="form-control" id="usersName"
+                    <input asp-for="UserName" type="text" class="form-control" id="users_name"
                            data-val="true"
                            data-val-required="GitHub's user name field is required."
                            required />
@@ -19,7 +19,7 @@
                 </div>
                 <div class="form-group">
                     <label asp-for="RepositoryName">GitHub repository name:</label>
-                    <input asp-for="RepositoryName" type="text" class="form-control" id="git_repo"
+                    <input asp-for="RepositoryName" type="text" class="form-control" id="repo_name"
                            data-val="true"
                            data-val-required="GitHub's user name field is required."
                            required />
@@ -27,14 +27,17 @@
                 </div>
                 <div class="form-group">
                     <label for="options">Choose option:</label>
-                    <select class="form-control" name="RequestType" id="options">
+                    <select class="form-control" name="RequestType" id="request_type">
                         <option value="0">Check if repository exist</option>
                     </select>
                 </div>
-                <button class="btn btn-default" type="submit">Go</button>
+                <button class="btn btn-default" id="githubinfo_submit" type="button">Go</button>
             </form>
         </div>
         <div class="col-sm-6 text-center" id="update_information">
         </div>
     </div>
 </div>
+@section Scripts{
+    <script src="~/js/site.js"></script>
+}
