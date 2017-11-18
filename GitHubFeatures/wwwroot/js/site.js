@@ -10,12 +10,12 @@ $('#githubinfo_submit').click(function () {
     var dataWithAntiforgeryToken = $.extend(dataToSend, { '__RequestVerificationToken': token });
 
     $.ajax({
-        url: "/Home/Check",
+        url: "/Home/CheckRepository",
         type: "POST",
-        data: dataWithAntiforgeryToken
-        //success: function (data) {
-        //},
-        //error: function () {
-        //}
+        data: dataWithAntiforgeryToken,
+        success: function (data) {
+            $("#result_window_pl").html(data);
+            $("#result_window").modal('show');
+        }
     });
 });

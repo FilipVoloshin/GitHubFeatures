@@ -5,6 +5,10 @@
 
     public partial class Repository
     {
+
+        [JsonProperty("description")]
+        public string Description { get; set; }
+
         [JsonProperty("html_url")]
         public string HtmlUrl { get; set; }
 

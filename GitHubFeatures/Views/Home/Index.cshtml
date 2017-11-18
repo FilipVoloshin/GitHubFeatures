@@ -7,7 +7,7 @@
     <div class="row">
         <div class="col-sm-6">
             <h2>GitHub features</h2>
-            <form asp-antiforgery="true" asp-action="Check" asp-controller="Home" method="post" id="githubinfo_form">
+            <form asp-antiforgery="true" asp-action="CheckRepository" asp-controller="Home" method="post" id="githubinfo_form">
                 @Html.AntiForgeryToken()
                 <div class="form-group">
                     <label asp-for="UserName">User's name:</label>
@@ -34,7 +34,11 @@
                 <button class="btn btn-default" id="githubinfo_submit" type="button">Go</button>
             </form>
         </div>
-        <div class="col-sm-6 text-center" id="update_information">
+        <div class="modal fade" id="result_window" tabindex="-1" role="dialog">
+            <div class="modal-dialog">
+                <div class="modal-content" id="result_window_pl">
+                </div>
+            </div>
         </div>
     </div>
 </div>

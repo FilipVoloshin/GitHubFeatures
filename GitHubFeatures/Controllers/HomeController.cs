@@ -4,6 +4,7 @@ using GitHubFeatures.Models.Enums;
 using GitHubFeatures.Models.Forms;
 using GitHubFeatures.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
+using System;
 
 namespace GitHubFeatures.Controllers
 {
@@ -24,28 +25,26 @@ namespace GitHubFeatures.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public IActionResult Check(GitHubInformationForm form, RequestTypes requestType)
+        public IActionResult CheckRepository(GitHubInformationForm form, RequestTypes request)
         {
+            Repository repositoryInformation = null;
             var url = string.Empty;
-            if (form != null)
+            
+            if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
             {
-                switch (requestType)
+                var gihubSettings = new GitHubSettings { UserName = form.UserName, RepositoryName = form.RepositoryName, RequestType = request };
+                url = _urlGenerator.GenerateUrlForGitHubApi(gihubSettings);
+                try
                 {
-                    case RequestTypes.CheckIfRepositoryExists:
-                        if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
-                        {
-                            var gihubSettings = new GitHubSettings { UserName = form.UserName, RepositoryName = form.RepositoryName, RequestType = requestType };
-                            url = _urlGenerator.GenerateUrlForGitHubApi(gihubSettings);
-                            var repositoryInformation = _githubService.ProcessRepositoryInfoByUrl(url);
-                            if (repositoryInformation != null)
-                                return PartialView("_Repository", repositoryInformation);
-                        }
-                        break;
-                    default:
-                        return new JsonResult(new { Error = true });
+                    repositoryInformation = _githubService.ProcessRepositoryInfoByUrl(url);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.InnerException = ex.Message;
                 }
             }
-            return new JsonResult(new { Error = true }); ;
+
+            return PartialView("_Repository", repositoryInformation);
         }
     }
 }
