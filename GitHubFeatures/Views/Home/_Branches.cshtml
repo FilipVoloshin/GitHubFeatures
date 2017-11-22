@@ -1,7 +1,8 @@
-﻿@model IList<PullRequest>
+﻿@model IList<GitHubFeatures.Models.Branch>
+
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only"></span></button>
-    <h4 class="modal-title">Pull requests</h4>
+    <h4 class="modal-title">Branches</h4>
 </div>
 <div id="repositorybody">
     <div class="row">
@@ -9,15 +10,13 @@
             @if (Model != null && Model.Any())
             {
                 <div class="alert alert-success">
-                    Github repository <a class="text-danger" href="@Model.FirstOrDefault().Head.Repo.HtmlUrl" target="_blank">
-                        @Model.FirstOrDefault().Head.Repo.Name
-                    </a> has @Model.Count pull requests.
+                   This repository has @Model.Count branches
                 </div>
                 <div class="col-md-10 col-md-offset-1">
                     <ol>
-                        @foreach (var pullRequest in Model)
+                        @foreach (var branch in Model)
                         {
-                            <li><a href="@pullRequest.HtmlUrl">@pullRequest.Title</a></li>
+                            <li><a href="@branch.Commit.Url">@branch.Name</a></li>
                         }
                     </ol>
                 </div>
@@ -25,7 +24,7 @@
             else
             {
                 <div class="alert alert-danger">
-                    There are no pull requests in repository, or repository/user doesn't exist. @if (ViewBag.InnerException != null)
+                    There are no branches in repository, or repository/user doesn't exist. @if (ViewBag.InnerException != null)
                 { <i>@ViewBag.InnerException</i> }
                 </div>
             }
