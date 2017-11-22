@@ -38,15 +38,15 @@
 
     public partial class Repository
     {
-        public static Repository FromJson(string json) => JsonConvert.DeserializeObject<Repository>(json, Converter.Settings);
+        public static Repository FromJson(string json) => JsonConvert.DeserializeObject<Repository>(json, ConverterSepository.Settings);
     }
 
-    public static class Serialize
+    public static class SerializeRepository
     {
-        public static string ToJson(this Repository self) => JsonConvert.SerializeObject(self, Converter.Settings);
+        public static string ToJson(this Repository self) => JsonConvert.SerializeObject(self, ConverterSepository.Settings);
     }
 
-    public class Converter
+    public class ConverterSepository
     {
         public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
         {

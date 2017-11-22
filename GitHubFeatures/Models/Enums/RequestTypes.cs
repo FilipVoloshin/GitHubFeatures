@@ -3,6 +3,7 @@
     public enum RequestTypes
     {
         CheckIfRepositoryExists = 0,
-        GetAllPullRequests = 1
+        GetAllPullRequests,
+        GetAllBranches
     }
 }

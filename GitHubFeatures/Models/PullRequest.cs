@@ -76,15 +76,15 @@ public partial class PullRequestInfo
 
 public partial class PullRequest
 {
-    public static List<PullRequest> FromJson(string json) => JsonConvert.DeserializeObject<List<PullRequest>>(json, Converter.Settings);
+    public static List<PullRequest> FromJson(string json) => JsonConvert.DeserializeObject<List<PullRequest>>(json, ConverterPullRequest.Settings);
 }
 
-public static class Serialize
+public static class SerializePullRequest
 {
-    public static string ToJson(this List<PullRequest> self) => JsonConvert.SerializeObject(self, Converter.Settings);
+    public static string ToJson(this List<PullRequest> self) => JsonConvert.SerializeObject(self, ConverterPullRequest.Settings);
 }
 
-public class Converter
+public class ConverterPullRequest
 {
     public static readonly JsonSerializerSettings Settings = new JsonSerializerSettings
     {

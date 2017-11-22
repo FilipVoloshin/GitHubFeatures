@@ -12,8 +12,9 @@ namespace GitHubFeatures.Helpers
         public const string GITHUB_API_URL = @"https://api.github.com/";
         public const string GITHUB_REPO_URL = @"repos/{:owner}/{:repo}";
         public const string GITHUB_PULL_REQUESTS_URL = @"repos/{:owner}/{:repo}/pulls";
+        public const string GITHUB_BRANCHES_URL = @"repos/{:owner}/{:repo}/branches";
 
-        public string SetUpApiString(string apiString, string userName, string repoName)
+        private string SetUpApiString(string apiString, string userName, string repoName)
         {
             var urlString = $"{GITHUB_API_URL}{apiString.Replace("{:owner}", userName).Replace("{:repo}", repoName)}";
             return $"{urlString}?{User_Key}&{User_Secret}";
@@ -32,6 +33,10 @@ namespace GitHubFeatures.Helpers
                 case RequestTypes.GetAllPullRequests:
                     if (!string.IsNullOrEmpty(settings.UserName) && !string.IsNullOrEmpty(settings.RepositoryName))
                         urlString = SetUpApiString(GITHUB_PULL_REQUESTS_URL, settings.UserName, settings.RepositoryName);
+                    break;
+                case RequestTypes.GetAllBranches:
+                    if (!string.IsNullOrEmpty(settings.UserName) && !string.IsNullOrEmpty(settings.RepositoryName))
+                        urlString = SetUpApiString(GITHUB_BRANCHES_URL, settings.UserName, settings.RepositoryName);
                     break;
             }
 

@@ -58,5 +58,26 @@ namespace GitHubFeatures.Services
                 throw ex;
             }
         }
+
+        public IList<Branch> ProcessBranches(string urlString)
+        {
+            IList<Branch> branches = new List<Branch>();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(urlString))
+                {
+                    var stringTask = client.GetStringAsync(urlString).Result;
+
+                    branches = Branch.FromJson(stringTask);
+                }
+
+                return branches;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }
