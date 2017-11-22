@@ -55,9 +55,9 @@ namespace GitHubFeatures.Controllers
             var url = string.Empty;
             if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
             {
-
+                var gihubSettings = new GitHubSettings { UserName = form.UserName, RepositoryName = form.RepositoryName, RequestType = request };
+                url = _urlGenerator.GenerateUrlForGitHubApi(gihubSettings);
             }
-
             return PartialView("_PullRequests");
         }
     }
