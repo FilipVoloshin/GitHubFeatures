@@ -46,5 +46,19 @@ namespace GitHubFeatures.Controllers
 
             return PartialView("_Repository", repositoryInformation);
         }
+
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CheckPullRequests(GitHubInformationForm form, RequestTypes request)
+        {
+            var url = string.Empty;
+            if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
+            {
+
+            }
+
+            return PartialView("_PullRequests");
+        }
     }
 }
