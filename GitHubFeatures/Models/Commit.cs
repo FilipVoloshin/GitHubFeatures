@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 
 namespace GitHubFeatures.Models
@@ -6,7 +7,7 @@ namespace GitHubFeatures.Models
     public partial class Commit
     {
         [JsonProperty("author")]
-        public object Author { get; set; }
+        public Author Author { get; set; }
 
         [JsonProperty("comments_url")]
         public string CommentsUrl { get; set; }
@@ -48,6 +49,8 @@ namespace GitHubFeatures.Models
 
         [JsonProperty("name")]
         public string Name { get; set; }
+
+        public DateTime? DateOfCommit { get { return DateTime.Parse(this.Date, null, System.Globalization.DateTimeStyles.RoundtripKind); } }
     }
 
     public partial class Commit

@@ -100,6 +100,7 @@ namespace GitHubFeatures.Controllers
         [ValidateAntiForgeryToken]
         public IActionResult CheckCommits(GitHubInformationForm form, RequestTypes request)
         {
+            var commintsNumber = 10;
             IList<Commit> commits = new List<Commit>();
             var url = string.Empty;
 
@@ -110,6 +111,10 @@ namespace GitHubFeatures.Controllers
                 try
                 {
                     commits = _githubService.ProcessCommits(url);
+                    if (commits.Any())
+                    {
+                        commits = commits.OrderByDescending(c=>c.Author.DateOfCommit).Take(commintsNumber).ToList();
+                    }
                 }
                 catch (Exception ex)
                 {
