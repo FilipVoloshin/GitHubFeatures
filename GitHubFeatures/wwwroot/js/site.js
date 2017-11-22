@@ -20,6 +20,9 @@ $('#githubinfo_submit').click(function () {
         case "2":
             url = "/Home/CheckBranches";
             break;
+        case "3":
+            url = "/Home/CheckCommits";
+            break;
     }
     $.ajax({
         url: url,

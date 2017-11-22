@@ -113,7 +113,7 @@ namespace GitHubFeatures.Controllers
                     commits = _githubService.ProcessCommits(url);
                     if (commits.Any())
                     {
-                        commits = commits.OrderByDescending(c=>c.Author.DateOfCommit).Take(commintsNumber).ToList();
+                        commits = commits.OrderByDescending(c=>c.PurpleCommit.Committer.DateOfCommit).Take(commintsNumber).ToList();
                     }
                 }
                 catch (Exception ex)
@@ -122,7 +122,7 @@ namespace GitHubFeatures.Controllers
                 }
             }
 
-            return PartialView("_Branches", commits);
+            return PartialView("_Commits", commits);
         }
     }
 }
