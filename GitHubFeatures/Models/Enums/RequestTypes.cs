@@ -4,6 +4,7 @@
     {
         CheckIfRepositoryExists = 0,
         GetAllPullRequests,
-        GetAllBranches
+        GetAllBranches,
+        LastCommits
     }
 }

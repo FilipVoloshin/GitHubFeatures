@@ -13,6 +13,8 @@ namespace GitHubFeatures.Helpers
         public const string GITHUB_REPO_URL = @"repos/{:owner}/{:repo}";
         public const string GITHUB_PULL_REQUESTS_URL = @"repos/{:owner}/{:repo}/pulls";
         public const string GITHUB_BRANCHES_URL = @"repos/{:owner}/{:repo}/branches";
+        public const string GITHUB_COMMITS_URL = @"repos/{:owner}/{:repo}/commits";
+
 
         private string SetUpApiString(string apiString, string userName, string repoName)
         {
@@ -37,6 +39,10 @@ namespace GitHubFeatures.Helpers
                 case RequestTypes.GetAllBranches:
                     if (!string.IsNullOrEmpty(settings.UserName) && !string.IsNullOrEmpty(settings.RepositoryName))
                         urlString = SetUpApiString(GITHUB_BRANCHES_URL, settings.UserName, settings.RepositoryName);
+                    break;
+                case RequestTypes.LastCommits:
+                    if (!string.IsNullOrEmpty(settings.UserName) && !string.IsNullOrEmpty(settings.RepositoryName))
+                        urlString = SetUpApiString(GITHUB_COMMITS_URL, settings.UserName, settings.RepositoryName);
                     break;
             }
 
