@@ -17,6 +17,9 @@ $('#githubinfo_submit').click(function () {
         case "1":
             url = "/Home/CheckPullRequests";
             break;
+        case "2":
+            url = "/Home/CheckBranches";
+            break;
     }
     $.ajax({
         url: url,
