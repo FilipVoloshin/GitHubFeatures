@@ -5,6 +5,8 @@ using GitHubFeatures.Models.Forms;
 using GitHubFeatures.Services.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 
 namespace GitHubFeatures.Controllers
 {
@@ -29,7 +31,7 @@ namespace GitHubFeatures.Controllers
         {
             Repository repositoryInformation = null;
             var url = string.Empty;
-            
+
             if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
             {
                 var gihubSettings = new GitHubSettings { UserName = form.UserName, RepositoryName = form.RepositoryName, RequestType = request };
@@ -53,12 +55,22 @@ namespace GitHubFeatures.Controllers
         public IActionResult CheckPullRequests(GitHubInformationForm form, RequestTypes request)
         {
             var url = string.Empty;
+            IList<PullRequest> pullRequests = new List<PullRequest>();
+
             if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
             {
                 var gihubSettings = new GitHubSettings { UserName = form.UserName, RepositoryName = form.RepositoryName, RequestType = request };
                 url = _urlGenerator.GenerateUrlForGitHubApi(gihubSettings);
+                try
+                {
+                    pullRequests = _githubService.ProcessPullRequests(url);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.InnerException = ex.Message;
+                }
             }
-            return PartialView("_PullRequests");
+            return PartialView("_PullRequests", pullRequests);
         }
     }
 }
