@@ -79,5 +79,26 @@ namespace GitHubFeatures.Services
                 throw ex;
             }
         }
+
+        public IList<Commit> ProcessCommits(string urlString)
+        {
+            IList<Commit> commits = new List<Commit>();
+
+            try
+            {
+                if (!string.IsNullOrEmpty(urlString))
+                {
+                    var stringTask = client.GetStringAsync(urlString).Result;
+
+                    commits = Commit.FromJson(stringTask);
+                }
+
+                return commits;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

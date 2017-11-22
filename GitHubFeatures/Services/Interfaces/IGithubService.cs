@@ -8,5 +8,6 @@ namespace GitHubFeatures.Services.Interfaces
         Repository ProcessRepositoryInfoByUrl(string urlString);
         IList<PullRequest> ProcessPullRequests(string url);
         IList<Branch> ProcessBranches(string url);
+        IList<Commit> ProcessCommits(string url);
     }
 }

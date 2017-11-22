@@ -95,5 +95,29 @@ namespace GitHubFeatures.Controllers
             }
             return PartialView("_Branches", branches);
         }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public IActionResult CheckCommits(GitHubInformationForm form, RequestTypes request)
+        {
+            IList<Commit> commits = new List<Commit>();
+            var url = string.Empty;
+
+            if (!string.IsNullOrEmpty(form.UserName) && !string.IsNullOrEmpty(form.RepositoryName))
+            {
+                var gihubSettings = new GitHubSettings { UserName = form.UserName, RepositoryName = form.RepositoryName, RequestType = request };
+                url = _urlGenerator.GenerateUrlForGitHubApi(gihubSettings);
+                try
+                {
+                    commits = _githubService.ProcessCommits(url);
+                }
+                catch (Exception ex)
+                {
+                    ViewBag.InnerException = ex.Message;
+                }
+            }
+
+            return PartialView("_Branches", commits);
+        }
     }
 }
