@@ -1,13 +1,13 @@
 ﻿using GitHubFeatures.Helpers.Interfaces;
 using GitHubFeatures.Models;
 using GitHubFeatures.Models.Enums;
+using Microsoft.Extensions.Options;
 
 namespace GitHubFeatures.Helpers
 {
     public class UrlGenerator : IUrlGenerator
     {
-        public string Client_Id => "31db8cea24ba6deef076";
-        public string Client_Secret => "b0ba3e1e8ab06aa9d0acb7f4db540f4a3e8dc6f9";
+        private readonly GitHubOptions _githubOptions;
 
         public const string GITHUB_API_URL = @"https://api.github.com/";
         public const string GITHUB_REPO_URL = @"repos/{:owner}/{:repo}";
@@ -15,11 +15,15 @@ namespace GitHubFeatures.Helpers
         public const string GITHUB_BRANCHES_URL = @"repos/{:owner}/{:repo}/branches";
         public const string GITHUB_COMMITS_URL = @"repos/{:owner}/{:repo}/commits";
 
+        public UrlGenerator(IOptions<GitHubOptions> githubOptions)
+        {
+            _githubOptions = githubOptions.Value;
+        }
 
         private string SetUpApiString(string apiString, string userName, string repoName)
         {
             var urlString = $"{GITHUB_API_URL}{apiString.Replace("{:owner}", userName).Replace("{:repo}", repoName)}";
-            return $"{urlString}?client_id={Client_Id}&client_secret={Client_Secret}";
+            return $"{urlString}?client_id={_githubOptions.ClientId}&client_secret={_githubOptions.ClientSecret}";
         }
 
         public string GenerateUrlForGitHubApi(GitHubSettings settings)

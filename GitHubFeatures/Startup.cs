@@ -10,6 +10,12 @@ using GitHubFeatures.Services.Interfaces;
 
 namespace GitHubFeatures
 {
+    public class GitHubOptions
+    {
+        public string ClientId { get; set; }
+        public string ClientSecret { get; set; }
+    }
+
     public class Startup
     {
         public Startup(IHostingEnvironment env)
@@ -31,10 +37,12 @@ namespace GitHubFeatures
             // Add framework services.
             services.AddAntiforgery(o => o.HeaderName = "XSRF-TOKEN");
             services.AddMvc();
+            services.AddOptions();
 
             //Add user's services
             services.AddTransient<IUrlGenerator, UrlGenerator>();
             services.AddTransient<IGithubService, GitHubService>();
+            services.Configure<GitHubOptions>(Configuration.GetSection("GitHubOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
