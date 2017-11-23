@@ -12,11 +12,11 @@
                 <div class="alert alert-success">
                    This repository has @Model.Count branches
                 </div>
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-10">
                     <ol>
                         @foreach (var branch in Model)
                         {
-                            <li><a href="@branch.Commit.Url">@branch.Name</a></li>
+                            <li>@branch.Name</li>
                         }
                     </ol>
                 </div>

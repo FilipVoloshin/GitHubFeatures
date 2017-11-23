@@ -13,11 +13,11 @@
                         @Model.FirstOrDefault().Head.Repo.Name
                     </a> has @Model.Count pull requests.
                 </div>
-                <div class="col-md-10 col-md-offset-1">
+                <div class="col-md-12">
                     <ol>
                         @foreach (var pullRequest in Model)
                         {
-                            <li><a href="@pullRequest.HtmlUrl">@pullRequest.Title</a></li>
+                            <li><a href="@pullRequest.HtmlUrl" target="_blank">@pullRequest.Title</a></li>
                         }
                     </ol>
                 </div>

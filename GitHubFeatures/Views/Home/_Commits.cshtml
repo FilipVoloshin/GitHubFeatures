@@ -16,20 +16,20 @@
                     <table class="table table-condensed table-striped">
                         <thead>
                             <tr>
-                                <th>#</th>
-                                <th width="45%">Commit</th>
-                                <th width="25%">Commiter</th>
+                                <th>SHA</th>
+                                <th width="35%">Commit</th>
+                                <th width="15%">Commiter</th>
                                 <th>Date of commit</th>
                             </tr>
                         </thead>
                         <tbody>
-                            @foreach (var commit in Model.Select((value, index) => new { value, index }))
+                            @foreach (var commit in Model)
                             {
                                 <tr>
-                                    <td>@(commit.index + 1)</td>
-                                    <td><a href="@commit.value.PurpleCommit.Url">@commit.value.PurpleCommit.Message</a></td>
-                                    <td>@commit.value.PurpleCommit.Committer.Name</td>
-                                    <td>@commit.value.PurpleCommit.Committer.DateOfCommit</td>
+                                    <td><a href="@commit.HtmlUrl" target="_blank">@String.Join("",commit.Sha.ToCharArray().Take(7))</a></td>
+                                    <td>@commit.PurpleCommit.Message</td>
+                                    <td>@commit.PurpleCommit.Committer.Name</td>
+                                    <td>@commit.PurpleCommit.Committer.DateOfCommit</td>
                                 </tr>
 
                             }

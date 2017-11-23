@@ -6,8 +6,8 @@ namespace GitHubFeatures.Helpers
 {
     public class UrlGenerator : IUrlGenerator
     {
-        public string User_Key => "31db8cea24ba6deef076";
-        public string User_Secret => "b0ba3e1e8ab06aa9d0acb7f4db540f4a3e8dc6f9";
+        public string Client_Id => "31db8cea24ba6deef076";
+        public string Client_Secret => "b0ba3e1e8ab06aa9d0acb7f4db540f4a3e8dc6f9";
 
         public const string GITHUB_API_URL = @"https://api.github.com/";
         public const string GITHUB_REPO_URL = @"repos/{:owner}/{:repo}";
@@ -19,7 +19,7 @@ namespace GitHubFeatures.Helpers
         private string SetUpApiString(string apiString, string userName, string repoName)
         {
             var urlString = $"{GITHUB_API_URL}{apiString.Replace("{:owner}", userName).Replace("{:repo}", repoName)}";
-            return $"{urlString}?{User_Key}&{User_Secret}";
+            return $"{urlString}?client_id={Client_Id}&client_secret={Client_Secret}";
         }
 
         public string GenerateUrlForGitHubApi(GitHubSettings settings)
