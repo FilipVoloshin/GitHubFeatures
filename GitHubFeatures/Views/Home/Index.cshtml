@@ -32,9 +32,14 @@
                         <option value="1">Get all pull requests list of repository</option>
                         <option value="2">Get all branches of repository</option>
                         <option value="3">Get ten last commits of repository</option>
+                        <option value="4">Show file by it's path</option>
                     </select>
                 </div>
-                <button class="btn btn-default" id="githubinfo_submit" type="button">Go</button>
+                <div id="path_div" class="form-group" style="display:none">
+                    <label for="Path">Github file path:</label>
+                    <textarea class="form-control" id="path_value"data-val="true" rows="4" cols="50">branch/path</textarea>
+                </div>
+                <a class="btn btn-default" id="githubinfo_submit">Go</a>
             </form>
         </div>
         <div class="modal fade" id="result_window" tabindex="-1" role="dialog">
