@@ -42,12 +42,14 @@ namespace GitHubFeatures
             //Add user's services
             services.AddTransient<IUrlGenerator, UrlGenerator>();
             services.AddTransient<IGithubService, GitHubService>();
+            services.AddTransient<ICSharpCompile, CSharpCompileService>();
+            services.AddTransient<IResultChecker, ResultChecker>();
             services.Configure<GitHubOptions>(Configuration.GetSection("GitHubOptions"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory, 
-            IUrlGenerator urlGenerator, IGithubService githubService)
+            IUrlGenerator urlGenerator, IGithubService githubService, ICSharpCompile sharpCompile, IResultChecker resultChecker)
         {
             loggerFactory.AddConsole(Configuration.GetSection("Logging"));
             loggerFactory.AddDebug();

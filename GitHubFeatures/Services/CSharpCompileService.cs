@@ -12,12 +12,13 @@ namespace GitHubFeatures.Services
     public class CSharpCompileService : ICSharpCompile
     {
         private const string API_URL = "https://www.microsoft.com/net/api/code";
+        private const string API_HEADER = "https://www.microsoft.com/net";
         public async Task<string> GetCodeResultAsync(string code)
         {
             using (var client = new HttpClient())
             {
                 HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Post, new Uri(API_URL));
-                request.Headers.Add("Referer", "https://www.microsoft.com/net");
+                request.Headers.Add("Referer", API_HEADER);
                 var codeSnippet = code;
 
                 var codeInput = new CodeRequest { Language = "csharp", CaptureStats = false, Sources = new string[1] };

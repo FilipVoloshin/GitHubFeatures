@@ -7,18 +7,28 @@
                 </div>
                 <div class="panel-body">
                     <div class="container">
-                        <div class="form-group">
-                            <label for="comment">Enter here C# code:</label>
-                            <textarea class="form-control" rows="15" id="csharpcode" style="overflow:hidden"></textarea>
-                        </div>
+                        <form asp-antiforgery="true" asp-action="CheckRepository" asp-controller="Home" method="post" id="csharp_form">
+                            @Html.AntiForgeryToken()
+                            <div class="form-group">
+                                <label for="comment">Enter here C# code:</label>
+                                <textarea class="form-control" rows="15" id="csharpcode" style="overflow:hidden">@ViewBag.Main</textarea>
+                            </div>
+                        </form>
                     </div>
                 </div>
                 <div class="panel-footer">
-                    <button class="btn btn-success">
+                    <button class="btn btn-success" id="check-btn">
                         Check
                     </button>
                 </div>
             </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="result_window" tabindex="-1" role="dialog">
+    <div class="modal-dialog">
+        <div class="modal-content" id="result_window_pl">
         </div>
     </div>
 </div>
